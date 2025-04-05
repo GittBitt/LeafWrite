@@ -22,26 +22,31 @@ struct GalleryView: View {
     ]
     
     var body: some View {
-        ScrollView {
-            if imageEntries.isEmpty {
-                Text("No images available")
-                    .foregroundColor(.secondary)
-                    .padding()
-            } else {
-                LazyVGrid(columns: columns, spacing: 16) {
-                    ForEach(imageEntries) { entry in
-                        if let image = entry.image {
-                            Image(uiImage: image)
-                                .resizable()
-                                .scaledToFill()
-                                .frame(width: 150, height: 150)
-                                .clipped()
+        ZStack {
+            // Set the overall background to a light green color.
+            Color(red: 0.9, green: 1.0, blue: 0.9)
+                .ignoresSafeArea()
+            ScrollView {
+                if imageEntries.isEmpty {
+                    Text("No images available")
+                        .foregroundColor(.secondary)
+                        .padding()
+                } else {
+                    LazyVGrid(columns: columns, spacing: 16) {
+                        ForEach(imageEntries) { entry in
+                            if let image = entry.image {
+                                Image(uiImage: image)
+                                    .resizable()
+                                    .scaledToFill()
+                                    .frame(width: 150, height: 150)
+                                    .clipped()
+                            }
                         }
                     }
+                    .padding()
                 }
-                .padding()
             }
+            .navigationTitle("Gallery")
         }
-        .navigationTitle("Gallery")
     }
 }

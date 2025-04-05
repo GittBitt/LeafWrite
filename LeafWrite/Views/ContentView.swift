@@ -12,7 +12,7 @@ struct DarkGreenButtonStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .padding()
-            .background(configuration.isPressed ? Color.green : Color.green.opacity(0.5))
+            .background(configuration.isPressed ? Color.green : Color.green.opacity(0.75))
             .cornerRadius(10)
             .animation(.easeInOut(duration: 0.2), value: configuration.isPressed)
     }
@@ -33,14 +33,15 @@ struct ContentView: View {
                         .frame(height: 10) // Adjust height as needed.
                         .padding(.top, 10)
                     
-                    // Optionally, add a title text below the image.
-                    Text("LeafWrite")
+                    // Placeholder title, adds title text below the image.
+                    Text("LeafNote")
                         .font(.largeTitle)
-                        .foregroundColor(.green)
+                        .fontWeight(.bold)
+                        .foregroundColor(Color.green.opacity(0.75))
                         .padding(10)
                     
-                    Text("Journal like you're texting yourself in the future!")
-                        .foregroundColor(.green)
+                    Text("Journal like you're messaging yourself!")
+                        .foregroundColor(Color.green.opacity(0.75))
                         .multilineTextAlignment(.center)
                         .padding(20)
                     
@@ -60,12 +61,12 @@ struct ContentView: View {
                     
                     NavigationLink(destination: EntryView(date: Date())) {
                         HStack {
-                            Image(systemName: "plus")
+                            Image(systemName: "pencil")
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                                 .frame(width: 24, height: 24)
                                 .foregroundColor(.white)
-                            Text("Add Entry")
+                            Text("Write Entry")
                                 .foregroundColor(.white)
                         }
                     }
@@ -79,6 +80,20 @@ struct ContentView: View {
                                 .frame(width: 24, height: 24)
                                 .foregroundColor(.white)
                             Text("Search Entry")
+                                .foregroundColor(.white)
+                        }
+                    }
+                    .buttonStyle(DarkGreenButtonStyle())
+                    
+                    //Currently only goes to EntryView, need the button to independently be able to add photos
+                    NavigationLink(destination: EntryView(date: Date())) {
+                        HStack {
+                            Image(systemName: "plus")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 24, height: 24)
+                                .foregroundColor(.white)
+                            Text("Add Photo")
                                 .foregroundColor(.white)
                         }
                     }
@@ -116,6 +131,8 @@ struct ContentView: View {
                 .padding()
             }
             .navigationTitle("LeafWrite")
+                Color.green.opacity(0.75)
+            
         }
     }
 }

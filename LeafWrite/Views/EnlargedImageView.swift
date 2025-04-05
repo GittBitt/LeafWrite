@@ -40,3 +40,4 @@ struct EnlargedImageView_Previews: PreviewProvider {
         EnlargedImageView(image: UIImage(systemName: "photo")!)
     }
 }
+

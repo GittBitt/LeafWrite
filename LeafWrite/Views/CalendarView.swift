@@ -11,26 +11,34 @@ struct CalendarView: View {
     @State private var selectedDate = Date()
     
     var body: some View {
-        
-        Text("Select a day to write entry for!")
-            .font(.title2)
-            .multilineTextAlignment(.center)
-            .padding(10)
-        VStack {
-            
-            DatePicker("Select Date", selection: $selectedDate, displayedComponents: [.date])
-                .datePickerStyle(GraphicalDatePickerStyle())
-                .padding()
-            NavigationLink(destination: EntryView(date: selectedDate)) {
-                HStack {
-                    Image(systemName: "pencil")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 20, height: 20)
-                    Text("Go to Entry")
-                }
+        ZStack {
+            // Set the overall background to a light green color.
+            Color(red: 0.9, green: 1.0, blue: 0.9)
+                .ignoresSafeArea()
+
+            VStack {
+                Text("Select a day to write entry for!")
+                    .font(.title2)
+                    .multilineTextAlignment(.center)
+                
+                DatePicker("Select Date", selection: $selectedDate, displayedComponents: [.date])
+                    .datePickerStyle(GraphicalDatePickerStyle())
+                    .padding()
+                    .background(Color.white)
+                
+                NavigationLink(destination: EntryView(date: selectedDate)) {
+                    HStack {
+                        Image(systemName: "pencil")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 25, height: 25)
+                            .foregroundColor(.white)
+                        Text("Go to Entry")
+                            .foregroundColor(.white)
+                    }
+                } .buttonStyle(DarkGreenButtonStyle())
             }
+            .navigationTitle("Calendar")
         }
-        .navigationTitle("Calendar")
     }
 }

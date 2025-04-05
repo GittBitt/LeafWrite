@@ -24,22 +24,27 @@ struct SearchView: View {
     }
     
     var body: some View {
-        VStack {
-            TextField("Search entries...", text: $searchText)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .padding()
-            
-            List(filteredEntries, id: \.id) { entry in
-                VStack(alignment: .leading) {
-                    Text(entry.text)
-                        .font(.headline)
-                    Text("\(entry.date, formatter: DateFormatter.mediumStyle)")
-                        .font(.subheadline)
-                        .foregroundColor(.secondary)
+        ZStack {
+            // Set the overall background to a light green color.
+            Color(red: 0.9, green: 1.0, blue: 0.9)
+                .ignoresSafeArea()
+            VStack {
+                TextField("Search entries...", text: $searchText)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .padding()
+                
+                List(filteredEntries, id: \.id) { entry in
+                    VStack(alignment: .leading) {
+                        Text(entry.text)
+                            .font(.headline)
+                        Text("\(entry.date, formatter: DateFormatter.mediumStyle)")
+                            .font(.subheadline)
+                            .foregroundColor(.secondary)
+                    }
                 }
             }
+            .navigationTitle("Search Entry")
         }
-        .navigationTitle("Search")
     }
 }
 

@@ -15,6 +15,7 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				DateFormatter.swift,
+				Views/Styles.swift,
 			);
 			target = 537BE5DB2DA0925C00C6D637 /* LeafWrite */;
 		};
@@ -26,6 +27,7 @@
 			buildPhase = 537BE5DA2DA0925C00C6D637 /* Resources */;
 			membershipExceptions = (
 				DateFormatter.swift,
+				Views/Styles.swift,
 			);
 		};
 /* End PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
