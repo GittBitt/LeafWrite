@@ -22,19 +22,18 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             ZStack {
-                // Set the overall background to a light green color.
                 Color(red: 0.9, green: 1.0, blue: 0.9)
                     .ignoresSafeArea()
                 
-                VStack(spacing: 20) {
-                    Image("placeholderLeaf.png") //bug: image not showing
+                VStack(spacing: 10) {
+                    // Placeholder image for the title.
+                    Image("placeholderLeaf.png")
                         .resizable()
                         .scaledToFit()
-                        .frame(height: 10) // Adjust height as needed.
-                        .padding(.top, 10)
+                        .frame(height: 50)
                     
-                    // Placeholder title, adds title text below the image.
-                    Text("LeafNote")
+                    // Title text.
+                    Text("LeafWrite")
                         .font(.largeTitle)
                         .fontWeight(.bold)
                         .foregroundColor(Color.green.opacity(0.75))
@@ -85,20 +84,21 @@ struct ContentView: View {
                     }
                     .buttonStyle(DarkGreenButtonStyle())
                     
-                    //Currently only goes to EntryView, need the button to independently be able to add photos
-                    NavigationLink(destination: EntryView(date: Date())) {
+                    //Forage camera button
+                    NavigationLink(destination: ForageCameraView()) {
                         HStack {
-                            Image(systemName: "plus")
+                            Image(systemName: "camera.viewfinder")
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                                 .frame(width: 24, height: 24)
                                 .foregroundColor(.white)
-                            Text("Add Photo")
+                            Text("Forage")
                                 .foregroundColor(.white)
                         }
                     }
                     .buttonStyle(DarkGreenButtonStyle())
                     
+                    //Navigates to gallery
                     NavigationLink(destination: GalleryView()) {
                         HStack {
                             Image(systemName: "photo.on.rectangle")
@@ -112,27 +112,11 @@ struct ContentView: View {
                     }
                     .buttonStyle(DarkGreenButtonStyle())
                     
-//Live camera button for debugging
-//                    NavigationLink(destination: LiveCameraView()) {
-//                        HStack {
-//                            Image(systemName: "camera")
-//                                .resizable()
-//                                .aspectRatio(contentMode: .fit)
-//                                .frame(width: 24, height: 24)
-//                                .foregroundColor(.white)
-//                            Text("Live Camera")
-//                                .foregroundColor(.white)
-//                        }
-//                    }
-                    .buttonStyle(DarkGreenButtonStyle())
-                    
                     Spacer()
                 }
                 .padding()
             }
             .navigationTitle("LeafWrite")
-                Color.green.opacity(0.75)
-            
         }
     }
 }

@@ -50,18 +50,24 @@ struct EntryView: View {
                                     Spacer()
                                 }
                             } else {
-                                // Text message bubble using MessageBubble shape.
+                                // Text message bubble using a RoundedRectangle.
                                 HStack {
                                     Button(action: {}) {
                                         Text(entry.text)
+                                            .padding(10)
                                             .foregroundColor(.white)
-                                            .padding(10)
-                                            .padding(10)
-                                            .background(
-//                                                MessageBubble() //fix later
-                                                Color.green.opacity(0.75)
-                                            )
-                                            .cornerRadius(10)
+                                    }
+                                    .background(
+                                        RoundedRectangle(cornerRadius: 10)
+                                            .fill(Color.green.opacity(0.75))
+                                    )
+                                    .contextMenu {
+                                        Button(action: { print("Edit tapped") }) {
+                                            Label("Edit", systemImage: "pencil")
+                                        }
+                                        Button(action: { print("Delete tapped") }) {
+                                            Label("Delete", systemImage: "trash")
+                                        }
                                     }
                                     Spacer()
                                 }
@@ -84,7 +90,7 @@ struct EntryView: View {
                             .foregroundColor(Color.green.opacity(0.75))
                     }
                     
-                    // TextField for entering a message.
+                    // TextField for message input.
                     TextField("Enter message", text: $newMessage)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                     
@@ -106,14 +112,14 @@ struct EntryView: View {
             }
         }
         .navigationTitle("Entry - \(date, formatter: DateFormatter.mediumStyle)")
-        // Add a green magnifying glass icon in the top right that navigates to SearchView.
+        // Top-right green magnifying glass icon to navigate to SearchView.
         .navigationBarItems(trailing:
             NavigationLink(destination: SearchView()) {
                 Image(systemName: "magnifyingglass")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 25, height: 25)
-                .foregroundColor(Color.green.opacity(0.75))
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 25, height: 25)
+                    .foregroundColor(Color.green.opacity(0.75))
             }
         )
         // ActionSheet to choose the image source.
