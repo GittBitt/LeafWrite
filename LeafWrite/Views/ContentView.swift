@@ -37,7 +37,7 @@ struct ContentView: View {
                         .font(.largeTitle)
                         .fontWeight(.bold)
                         .foregroundColor(Color.green.opacity(0.75))
-                        .padding(10)
+                        .padding(20)
                     
                     Text("Journal like you're messaging yourself!")
                         .foregroundColor(Color.green.opacity(0.75))
@@ -116,7 +116,7 @@ struct ContentView: View {
                 }
                 .padding()
             }
-            .navigationTitle("LeafWrite")
+//            .navigationTitle("LeafWrite")
         }
     }
 }

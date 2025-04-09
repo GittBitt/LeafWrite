@@ -35,6 +35,8 @@ class CameraManager: NSObject, ObservableObject, AVCaptureVideoDataOutputSampleB
     // Vision request using YOLOv3.
     private var visionRequest: VNCoreMLRequest?
     
+    private var photoCaptureProcessor: PhotoCaptureProcessor?
+    
     override init() {
         super.init()
         configureSession()
@@ -66,6 +68,7 @@ class CameraManager: NSObject, ObservableObject, AVCaptureVideoDataOutputSampleB
         
         // Add photo output for still image capture.
         if session.canAddOutput(photoOutput) {
+            print("add photoOutput")
             session.addOutput(photoOutput)
         }
         
@@ -99,11 +102,14 @@ class CameraManager: NSObject, ObservableObject, AVCaptureVideoDataOutputSampleB
         if photoOutput.supportedFlashModes.contains(.auto) {
             settings.flashMode = .auto
         }
-        photoOutput.capturePhoto(with: settings, delegate: PhotoCaptureProcessor { image in
+        
+        photoCaptureProcessor = PhotoCaptureProcessor { image in
             DispatchQueue.main.async {
                 completion(image)
             }
-        })
+        }
+            photoOutput.capturePhoto(with: settings, delegate: photoCaptureProcessor!
+        )
     }
     
     private func getCameraInput(isFront: Bool) -> AVCaptureDeviceInput? {
