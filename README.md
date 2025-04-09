@@ -9,6 +9,13 @@ An experimental journaling app that allows the user to scan their surroundings a
 ![image](https://github.com/user-attachments/assets/11d98d33-382a-4f6e-8f07-2a189eca5fa2)
 
 
+## Features
+- Calendar
+- Journal Entry
+- Search Entries
+- Forage Camera
+- Journal Gallery
+
 ## License
 
 [MIT](LICENSE.md)
