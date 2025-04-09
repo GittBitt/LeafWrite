@@ -19,6 +19,8 @@ struct CalendarView: View {
             VStack {
                 Text("Select a day to write entry for!")
                     .font(.title2)
+                    .shadow(radius: 1, x: 0, y: 1)
+                    .foregroundColor(.black)
                     .multilineTextAlignment(.center)
                 
                 DatePicker("Select Date", selection: $selectedDate, displayedComponents: [.date])

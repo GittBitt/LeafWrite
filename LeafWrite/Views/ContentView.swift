@@ -26,11 +26,11 @@ struct ContentView: View {
                     .ignoresSafeArea()
                 
                 VStack(spacing: 10) {
-                    // Placeholder image for the title.
-                    Image("placeholderLeaf.png")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(height: 50)
+//                    // Placeholder image for the title.
+//                    Image("placeholderLeaf.png")
+//                        .resizable()
+//                        .scaledToFit()
+//                        .frame(height: 50)
                     
                     // Title text.
                     Text("LeafWrite")
@@ -125,6 +125,6 @@ struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
             .environmentObject(JournalViewModel())
-            .environmentObject(ThemeManager())
+//            .environmentObject(ThemeManager())
     }
 }

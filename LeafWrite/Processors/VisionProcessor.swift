@@ -7,21 +7,33 @@
 
 
 // Processors/VisionProcessor.swift
-import UIKit
+import Foundation
 import Vision
+import CoreML
+import UIKit
 
-struct VisionProcessor {
+class VisionProcessor {
     static func processImage(_ image: UIImage, completion: @escaping (UIImage) -> Void) {
-        guard let cgImage = image.cgImage else { return }
-        
-        let request = VNRecognizeTextRequest { (request, error) in
-            guard let observations = request.results as? [VNRecognizedTextObservation] else {
+        guard let cgImage = image.cgImage else {
+            DispatchQueue.main.async {
                 completion(image)
+            }
+            return
+        }
+        let request = VNRecognizeTextRequest { (request, error) in
+            if let error = error {
+                print("Vision error: \(error)")
+                DispatchQueue.main.async { completion(image) }
                 return
             }
-            // Overlay red bounding boxes on recognized text areas.
+            guard let observations = request.results as? [VNRecognizedTextObservation] else {
+                DispatchQueue.main.async { completion(image) }
+                return
+            }
             let processedImage = drawObservations(on: image, observations: observations)
-            completion(processedImage)
+            DispatchQueue.main.async {
+                completion(processedImage)
+            }
         }
         request.recognitionLevel = .accurate
         
@@ -31,7 +43,7 @@ struct VisionProcessor {
                 try handler.perform([request])
             } catch {
                 print("Vision error: \(error)")
-                completion(image)
+                DispatchQueue.main.async { completion(image) }
             }
         }
     }
@@ -47,13 +59,14 @@ struct VisionProcessor {
         
         for observation in observations {
             let box = observation.boundingBox
-            let rect = CGRect(x: box.minX * image.size.width,
-                              y: (1 - box.maxY) * image.size.height,
-                              width: box.width * image.size.width,
-                              height: box.height * image.size.height)
+            let rect = CGRect(
+                x: box.minX * image.size.width,
+                y: (1 - box.maxY) * image.size.height,
+                width: box.width * image.size.width,
+                height: box.height * image.size.height
+            )
             context.stroke(rect)
         }
-        
         let processedImage = UIGraphicsGetImageFromCurrentImageContext() ?? image
         UIGraphicsEndImageContext()
         return processedImage

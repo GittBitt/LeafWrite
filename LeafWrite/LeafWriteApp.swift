@@ -9,11 +9,14 @@ import SwiftUI
 
 @main
 struct LeafWriteApp: App {
+    @StateObject private var journalVM = JournalViewModel()
+
     var body: some Scene {
         WindowGroup {
             ContentView()
                 .environmentObject(JournalViewModel())
-                .environmentObject(ThemeManager())
+//                .environmentObject(ThemeManager())
+                .environmentObject(journalVM)
         }
     }
 }
