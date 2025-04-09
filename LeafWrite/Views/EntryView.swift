@@ -128,6 +128,7 @@ struct EntryView: View {
                 .default(Text("Take Photo")) {
                     sourceType = .camera
                     showImagePicker = true
+                    
                 },
                 .default(Text("Choose from Library")) {
                     sourceType = .photoLibrary
